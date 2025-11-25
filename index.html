@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wizarding World Houses</title>
     <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
 </head>
 <body id="landing-page">
     <section class="section__nav">
@@ -24,10 +25,21 @@
                     <p class="header__description">Discover the witches and wizards of Hogwarts School of Witchcraft and Wizardry.</p>
                     <div class="search__input">
                         <input class="search__text" placeholder="Seach for a wizard"
-                        onchange="searchWizards()">
+                        onchange="searchWizards(event)">
+                    </div>
+                    <div class="filter__wizards">
+                        <h1 class="filter__title">Wizards</h1>
+                    <select id="filter" onchange="filterWizards(event)">
+                        <option disabled selected value="">Sort</option>
+                        <option value="asc" onclick="sortWizardsAsc()">A-Z</option>
+                        <option value="desc" onclick="sortWizardsDesc()">Z-A</option>
+                    </select>
                     </div>
                 </div>
             </header>
+        </section>
+        <section class="search">
+            <div class="wizards"></div>
         </section>
         <footer>
     <div class="row footer__row">
