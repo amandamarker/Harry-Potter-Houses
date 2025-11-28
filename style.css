@@ -33,7 +33,7 @@ section {
 
 #landing-page {
     min-height: 100vh;
-    padding: 20px 0;
+    padding: 0px 20;
 }
 
 /* NAVIGATION */
@@ -173,7 +173,14 @@ nav {
     color: white;
 }
 
-
+.wizards {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 24px;
+}
+    
 /* FOOTER */
 
 footer {

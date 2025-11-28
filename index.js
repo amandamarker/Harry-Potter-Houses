@@ -1,18 +1,29 @@
 const wizardsWrapper = document.querySelector('.wizards');
-console.log(wizardsWrapper);
+
 function searchWizards(event) {
-    console.log(event.target.value)
+    rendorWizards(event.target.value);
 }
 
-async function rendorWizards() {
-    const response = await fetch('https://wizard-world-api.herokuapp.com/Wizards')
-    const data =  await response.json()
-    const wizardsArr = data.Search
-    wizardsWrapper.innerHTML = wizardsArr.map((wizards) => {
-        return `
-        div class="wizards">
+async function rendorWizards(searchTerm) {
+    console.log("this is the searchTerm:", searchTerm);  
+    const response = await fetch(
+        'https://wizard-world-api.herokuapp.com/Wizards');
+    const wizardsArr =  await response.json();
+    console.log(wizardsWrapper);
+    wizardsWrapper.innerHTML = wizardsArr.slice(0-6).map((wizard) => {
+        return (`
+        <div class="wizards">
+        <h1>${wizard.firstName || ""} ${wizard.lastName}</h1>
+        
+        ${wizard.elixirs.map((elixir) => (
         `
-    })
+        <p>Elixir: ${elixir.name}</p>
+        `
+        )).join('')}
+
+        </div>
+        `);
+    }).join('');
 }
 
 rendorWizards()
