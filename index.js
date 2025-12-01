@@ -9,11 +9,15 @@ function searchMovies(event) {
 let currentMovies = [];
 
 async function rendorMovies(searchTerm) { 
+    moviesWrapper.innerHTML = `<i class="fas fa-spinner movies__loading--spinner"></i>`;
     const response = await fetch(
         `https://omdbapi.com/?s=${searchTerm}&apikey=c5882ffb`);
     const data =  await response.json();
-    currentMovies = data.Search;
-    displayMovies(currentMovies);
+    if (!data.Search || data.Search.length === 0) {
+        moviesWrapper.innerHTML = `No movies found. Please try again!`;
+        return; 
+    }
+    displayMovies(data.Search);
 }
 
 function displayMovies(movieList) {
@@ -24,11 +28,12 @@ function displayMovies(movieList) {
         <div class="movie">
         <img src="${movie.Poster} alt="" />
         <h3>${movie.Title}</h3>
-        <p>Year: ${movie.Year}</p>
-    </div>
-        `;
+        <p>Year: ${movie.Year}</p> 
+    </div> 
+        `; 
     }).join('');
 }
+
 
 function sortChange(event) {
     const sortOption = event.target.value;
@@ -45,26 +50,5 @@ function sortChange(event) {
     displayMovies(sortedMovies);
 }
 
-function displayMovies(searchTerm) {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-           resolve(
-            `https://omdbapi.com/?s=${searchTerm}&apikey=c5882ffb`
-           );
-        }, 1000);
-    })
-}
 
-let movies;
-
-async function rendorMovies();
-    const moviesWrapper = document.querySelector('.movies');
-
-    moviesWrapper.classList += ' movies__loading';
-
-if (!movies) {
-    movies = await getMovies ();
-}
-
-    moviesWrapper.classList.remove('movies__loading');
 
