@@ -17,6 +17,7 @@ async function rendorMovies(searchTerm) {
         moviesWrapper.innerHTML = `No movies found. Please try again!`;
         return; 
     }
+    currentMovies = data.Search;
     displayMovies(data.Search);
 }
 
@@ -49,11 +50,9 @@ function sortChange(event) {
     }
 
     if (sortOption === 'aToZ') {
-        sortedMovies.sort((a, b) => b.Name - a.Name);
-    }
+        sortedMovies.sort((a, b) => b.Title.localeCompare(a.Title));  }
     else if (sortOption === 'ZToA') {
-        sortedMovies.sort((a, b) => a.Name - b.Name);
-    }
+        sortedMovies.sort((a, b) => a.Title.localeCompare(b.Title));  }
 
     displayMovies(sortedMovies);
 }
